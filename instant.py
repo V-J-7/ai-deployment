@@ -1,9 +1,13 @@
 from fastapi import FastAPI
 from openai import OpenAI
 from starlette.responses import HTMLResponse
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
 app = FastAPI()
 client = OpenAI(
+    api_key = os.environ.get("OPENAI_API_KEY"),
     base_url="https://generativelanguage.googleapis.com/v1beta/openai/"
 )
 @app.get("/", response_class = HTMLResponse)
